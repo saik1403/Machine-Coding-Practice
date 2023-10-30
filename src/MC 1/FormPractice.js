@@ -2,25 +2,26 @@ import { useEffect, useState } from "react"
 
 const FormPractice = () => {
     const [userDetails, setUserDetails] = useState({
+        rank: "",
         name: "",
         email: "",
         gender: "",
-        dateOfBirth : "",
+        dateOfBirth: "",
         country: [],
 
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         const date = new Date();
-        const currentDate = `${date.getFullYear()}-${date.getMonth()+1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1}-${date.getDate()}`;
-        console.log(currentDate,"at here 88")
-        setUserDetails((prev)=>{
+        const currentDate = `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate()}`;
+        console.log(currentDate, "at here 88")
+        setUserDetails((prev) => {
             return {
                 ...prev,
                 dateOfBirth: currentDate
             }
         })
-    },[])
+    }, [])
     //Updateding single state
     const updateName = (val) => {
         const updatedObj = {
@@ -86,6 +87,18 @@ const FormPractice = () => {
             backgroundColor: 'mintcream'
         }}>
             <form onSubmit={handelSubmit}>
+                {/* dropdown */}
+                <select name="rank" onChange={handelOnChange}>
+                    <option>
+                        Mr
+                    </option>
+                    <option>
+                        Mrs
+                    </option>
+                    <option>
+                        Ms
+                    </option>
+                </select>
                 {/* text type */}
                 <label>Full Name</label> : <input type="text" name="name" onChange={handelOnChange} />
                 <br /><p />
@@ -115,7 +128,7 @@ const FormPractice = () => {
                 <label>America</label><input type="checkbox" name="country" value="America" onChange={(e) => { handelOnChange(e) }} />
                 <br /><p />
 
-                
+
                 <button type='submit'>Submit </button>
 
 
